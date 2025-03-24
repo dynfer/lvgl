@@ -19,6 +19,8 @@ extern "C" {
 
 #include "../../../display/lv_display.h"
 
+#define MAX_LAYER 2
+
 /*********************
  *      DEFINES
  *********************/
