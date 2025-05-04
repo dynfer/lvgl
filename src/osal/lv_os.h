@@ -19,6 +19,28 @@ extern "C" {
  *********************/
 #include "../misc/lv_types.h"
 
+#if LV_USE_OS == LV_OS_NONE
+#include "lv_os_none.h"
+#elif LV_USE_OS == LV_OS_PTHREAD
+#include "lv_pthread.h"
+#elif LV_USE_OS == LV_OS_FREERTOS
+#include "lv_freertos.h"
+#elif LV_USE_OS == LV_OS_CMSIS_RTOS2
+#include "lv_cmsis_rtos2.h"
+#elif LV_USE_OS == LV_OS_RTTHREAD
+#include "lv_rtthread.h"
+#elif LV_USE_OS == LV_OS_WINDOWS
+#include "lv_windows.h"
+#elif LV_USE_OS == LV_OS_MQX
+#include "lv_mqx.h"
+#elif LV_USE_OS == LV_OS_SDL2
+#include "lv_sdl2.h"
+#elif LV_USE_OS == LV_OS_CHIBIOS
+#include "lv_chibios.h"
+#elif LV_USE_OS == LV_OS_CUSTOM
+#include LV_OS_CUSTOM_INCLUDE
+#endif
+
 /*********************
  *      DEFINES
  *********************/
