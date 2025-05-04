@@ -49,17 +49,17 @@ static void flush_cb(lv_display_t * disp, const lv_area_t * area, uint8_t * px_m
 static void flush_wait_cb(lv_display_t * disp);
 static lv_color_format_t get_lv_cf_from_layer_cf(uint32_t cf);
 #if !defined(LV_OS_CHIBIOS)
-static void reload_event_callback(LTDC_HandleTypeDef * hltdc);
+    static void reload_event_callback(LTDC_HandleTypeDef * hltdc);
 #elif defined(LV_OS_CHIBIOS)
-static void reload_event_callback(void);
+    static void reload_event_callback(void);
 #endif
 
 #if LV_ST_LTDC_USE_DMA2D_FLUSH
-#if !defined(LV_OS_CHIBIOS)
-    static void transfer_complete_callback(DMA2D_HandleTypeDef * hdma2d);
-#elif defined(LV_OS_CHIBIOS)
-    static void transfer_complete_callback(void);
-#endif
+    #if !defined(LV_OS_CHIBIOS)
+        static void transfer_complete_callback(DMA2D_HandleTypeDef * hdma2d);
+    #elif defined(LV_OS_CHIBIOS)
+        static void transfer_complete_callback(void);
+    #endif
     static uint32_t get_dma2d_output_cf_from_layer_cf(uint32_t cf);
     static uint32_t get_dma2d_input_cf_from_lv_cf(uint32_t cf);
 #endif
@@ -120,9 +120,9 @@ static lv_display_t * create(void * buf1, void * buf2, uint32_t buf_size, uint32
     uint32_t layer_cf = layer_cfg->PixelFormat;
 #elif defined(LV_OS_CHIBIOS)
     startLTDCChibiOS();
-    #if LV_ST_LTDC_USE_DMA2D_FLUSH || LV_USE_DRAW_DMA2D
-        startDMA2DChibiOS();
-    #endif
+#if LV_ST_LTDC_USE_DMA2D_FLUSH || LV_USE_DRAW_DMA2D
+    startDMA2DChibiOS();
+#endif
     const LTDCConfig * layer_cfg = LTDCD1.config;
     uint32_t layer_width = layer_cfg->screen_width;
     uint32_t layer_height = layer_cfg->screen_height;
@@ -198,7 +198,7 @@ static void flush_cb(lv_display_t * disp, const lv_area_t * area, uint8_t * px_m
 #if !defined(LV_OS_CHIBIOS)
         uint8_t * fb = (uint8_t *) layer_cfg->FBStartAdress;
 #elif defined(LV_OS_CHIBIOS)
-        uint8_t *fb = (uint8_t *)layer_cfg->bg_laycfg->frame->bufferp;
+        uint8_t * fb = (uint8_t *)layer_cfg->bg_laycfg->frame->bufferp;
 #endif
         uint32_t px_size = lv_color_format_get_size(cf);
         uint32_t fb_stride = px_size * disp_width;
@@ -279,9 +279,9 @@ static lv_color_format_t get_lv_cf_from_layer_cf(uint32_t cf)
     }
 }
 #if !defined(LV_OS_CHIBIOS)
-static void reload_event_callback(LTDC_HandleTypeDef * hltdc)
+    static void reload_event_callback(LTDC_HandleTypeDef * hltdc)
 #elif defined(LV_OS_CHIBIOS)
-static void reload_event_callback(void)
+    static void reload_event_callback(void)
 #endif
 {
     uint32_t i;
@@ -302,9 +302,9 @@ void reload_event_callback_handler(void)
 
 #if LV_ST_LTDC_USE_DMA2D_FLUSH
 #if !defined(LV_OS_CHIBIOS)
-static void transfer_complete_callback(DMA2D_HandleTypeDef * hdma2d)
+    static void transfer_complete_callback(DMA2D_HandleTypeDef * hdma2d)
 #elif defined(LV_OS_CHIBIOS)
-static void transfer_complete_callback(void)
+    static void transfer_complete_callback(void)
 #endif
 {
     DMA2D->IFCR = 0x3FU;
