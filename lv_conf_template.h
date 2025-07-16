@@ -1364,6 +1364,13 @@
             #define LV_ST_LTDC_DMA2D_INCLUDE "ChibiOS-Contrib/os/hal/ports/STM32/LLD/DMA2Dv1/hal_stm32_dma2d.h"
         #endif
     #endif
+    #if LV_ST_LTDC_USE_DMA2D_FLUSH
+        #if LV_USE_OS != LV_OS_CHIBIOS
+            #define LV_ST_LTDC_DMA2D_INCLUDE "dma2d.h"
+        #else
+            #define LV_ST_LTDC_DMA2D_INCLUDE "ChibiOS-Contrib/os/hal/ports/STM32/LLD/DMA2Dv1/hal_stm32_dma2d.h"
+        #endif
+    #endif
 #endif
 
 /** Driver for NXP ELCDIF */
