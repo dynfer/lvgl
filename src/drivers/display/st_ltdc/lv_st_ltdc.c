@@ -8,7 +8,7 @@
  *********************/
 
 #include "../../../lv_conf_internal.h"
-#if LV_USE_ST_LTDC
+#if LV_USE_ST_LTDC && LV_USE_OS != LV_OS_CHIBIOS
 
 #include "lv_st_ltdc.h"
 #include "../../../display/lv_display_private.h"
@@ -145,6 +145,7 @@ static lv_display_t * create(void * buf1, void * buf2, uint32_t buf_size, uint32
     uint32_t layer_cf = layer_cfg->bg_laycfg->frame->fmt;
 #endif
     lv_color_format_t cf = get_lv_cf_from_layer_cf(layer_cf);
+
     lv_display_t * disp = lv_display_create(layer_width, layer_height);
     lv_display_set_color_format(disp, cf);
     lv_display_set_flush_cb(disp, flush_cb);

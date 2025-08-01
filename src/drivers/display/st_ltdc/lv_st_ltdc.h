@@ -15,7 +15,7 @@ extern "C" {
  *********************/
 
 #include "../../../lv_conf_internal.h"
-#if LV_USE_ST_LTDC
+#if LV_USE_ST_LTDC && LV_USE_OS != LV_OS_CHIBIOS
 
 #include "../../../display/lv_display.h"
 
