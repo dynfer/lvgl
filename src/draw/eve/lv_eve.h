@@ -63,6 +63,7 @@ typedef struct {
     uint16_t scy;
 } lv_eve_drawing_context_t;
 
+<<<<<<< HEAD
 /* drawing context that is not saved and restored
  * by SAVE_CONTEXT and RESTORE_CONTEXT
  */
@@ -74,6 +75,8 @@ typedef struct {
     uint32_t bitmap_layout_h;
 } lv_eve_drawing_state_t;
 
+=======
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 /**********************
  *  GLOBAL PROTOTYPES
  **********************/
@@ -90,13 +93,18 @@ void lv_eve_vertex_2f(int16_t x, int16_t y);
 void lv_eve_color_mask(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 void lv_eve_stencil_func(uint8_t func, uint8_t ref, uint8_t mask);
 void lv_eve_stencil_op(uint8_t sfail, uint8_t spass);
+<<<<<<< HEAD
 void lv_eve_blend_func(uint8_t src, uint8_t dst);
+=======
+void lv_eve_blend_func(uint8_t sfail, uint8_t spass);
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 
 void lv_eve_draw_circle_simple(int16_t coord_x1, int16_t coord_y1, uint16_t radius_t);
 void lv_eve_draw_rect_simple(int16_t coord_x1, int16_t coord_y1, int16_t coord_x2, int16_t coord_y2,
                              uint16_t radius);
 void lv_eve_mask_round(int16_t coord_x1, int16_t coord_y1, int16_t coord_x2, int16_t coord_y2, int16_t radius);
 
+<<<<<<< HEAD
 /**
  * Set the bitmap source to `addr`. SPI transmission will occur unless it is already set to this value.
  * The bitmap source is not part of the saved and restored context.
@@ -124,6 +132,8 @@ void lv_eve_bitmap_size(uint8_t filter, uint8_t wrapx, uint8_t wrapy, uint16_t w
  */
 void lv_eve_bitmap_layout(uint8_t format, uint16_t linestride, uint16_t height);
 
+=======
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 /**********************
  *  EXTERN VARIABLES
  **********************/

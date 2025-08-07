@@ -1,8 +1,8 @@
 .. _ft81x:
 
-===========
-EVE (FT81x)
-===========
+=====
+FT81x
+=====
 
 A minimal framebuffer driver for EVE FT81x smart display controllers. Works for BT81x too.
 

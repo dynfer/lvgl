@@ -56,6 +56,7 @@ void * lv_draw_eve_display_get_user_data(lv_display_t * disp);
 lv_indev_t * lv_draw_eve_touch_create(lv_display_t * disp);
 
 
+<<<<<<< HEAD
 /* RAM_G asset pre-upload functions */
 
 /**
@@ -88,6 +89,8 @@ void lv_draw_eve_pre_upload_font_range(lv_display_t * disp, const lv_font_t * fo
 void lv_draw_eve_pre_upload_font_text(lv_display_t * disp, const lv_font_t * font, const char * text);
 
 
+=======
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 /* Low-level EVE control functions */
 
 /**

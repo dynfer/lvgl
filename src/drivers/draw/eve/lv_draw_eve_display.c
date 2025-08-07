@@ -13,7 +13,10 @@
 #include "../../../draw/eve/lv_eve.h"
 #include "../../../draw/eve/lv_draw_eve.h"
 #include "../../../display/lv_display_private.h"
+<<<<<<< HEAD
 #include "../../../misc/lv_text_private.h"
+=======
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 
 #include "../../../libs/FT800-FT813/EVE_commands.h"
 
@@ -90,6 +93,7 @@ lv_indev_t * lv_draw_eve_touch_create(lv_display_t * disp)
     return indev;
 }
 
+<<<<<<< HEAD
 void lv_draw_eve_pre_upload_image(lv_display_t * disp, const void * src)
 {
     LV_ASSERT_MSG(disp->flush_cb == flush_cb, "tried to do an LVGL EVE pre-upload without a draw_eve display");
@@ -156,6 +160,8 @@ void lv_draw_eve_pre_upload_font_text(lv_display_t * disp, const lv_font_t * fon
     }
 }
 
+=======
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 uint8_t lv_draw_eve_memread8(lv_display_t * disp, uint32_t address)
 {
     LV_ASSERT_MSG(disp->flush_cb == flush_cb, "tried to use an LVGL EVE command without a draw_eve display");

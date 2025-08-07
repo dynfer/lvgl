@@ -102,7 +102,11 @@ static int32_t eve_dispatch(lv_draw_unit_t * draw_unit, lv_layer_t * layer)
 
     eve_execute_drawing(draw_eve_unit);
 
+<<<<<<< HEAD
     draw_eve_unit->task_act->state = LV_DRAW_TASK_STATE_FINISHED;
+=======
+    draw_eve_unit->task_act->state = LV_DRAW_TASK_STATE_READY;
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
     draw_eve_unit->task_act = NULL;
 
     /*The draw unit is free now. Request a new dispatching as it can get a new task*/

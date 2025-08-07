@@ -18,6 +18,11 @@
 #include "../lv_draw_label_private.h"
 #include "../lv_draw_rect.h"
 #include "lv_eve.h"
+<<<<<<< HEAD
+=======
+#include "lv_draw_eve_ram_g.h"
+#include "../../font/lv_font_fmt_txt.h"
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 
 /*********************
  *      DEFINES
@@ -62,6 +67,7 @@ void lv_draw_eve_label(lv_draw_task_t * t, const lv_draw_label_dsc_t * dsc, cons
     lv_eve_restore_context();
 }
 
+<<<<<<< HEAD
 bool lv_draw_eve_label_font_check(const lv_font_t * font)
 {
     if(font->get_glyph_bitmap != lv_font_get_bitmap_fmt_txt) {
@@ -114,6 +120,8 @@ uint32_t lv_draw_eve_label_upload_glyph(bool burst_is_active, const lv_font_fmt_
     return ramg_addr;
 }
 
+=======
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 /**********************
  *   STATIC FUNCTIONS
  **********************/
@@ -132,6 +140,7 @@ static void lv_draw_eve_letter_cb(lv_draw_task_t * t, lv_draw_glyph_dsc_t * glyp
 
     const lv_font_t * font = glyph_draw_dsc->g->resolved_font;
 
+<<<<<<< HEAD
     if(!lv_draw_eve_label_font_check(font)) {
         return;
     }
@@ -139,27 +148,69 @@ static void lv_draw_eve_letter_cb(lv_draw_task_t * t, lv_draw_glyph_dsc_t * glyp
     const lv_font_fmt_txt_dsc_t * font_dsc = font->dsc;
     uint32_t gid_index = glyph_draw_dsc->g->gid.index;
     const lv_font_fmt_txt_glyph_dsc_t * glyph_dsc = &font_dsc->glyph_dsc[gid_index];
+=======
+    if(font->get_glyph_bitmap != lv_font_get_bitmap_fmt_txt) {
+        LV_LOG_WARN("lv_draw_eve can only render static fonts for now.");
+        return;
+    }
+
+    if(glyph_draw_dsc->format != LV_FONT_GLYPH_FORMAT_A4) {
+        LV_LOG_WARN("lv_draw_eve can only render 4 BPP fonts for now.");
+        return;
+    }
+
+    const lv_font_fmt_txt_dsc_t * font_dsc = (lv_font_fmt_txt_dsc_t *) font->dsc;
+    uint32_t gid_index = glyph_draw_dsc->g->gid.index;
+    const lv_font_fmt_txt_glyph_dsc_t * glyph_dsc = &font_dsc->glyph_dsc[gid_index];
+    const uint8_t * glyph_bitmap = &font_dsc->glyph_bitmap[glyph_dsc->bitmap_index];
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 
     uint16_t g_box_w = glyph_dsc->box_w;
     uint16_t g_box_h = glyph_dsc->box_h;
 
     uint16_t g_aligned_stride = (g_box_w + 1) / 2;
 
+<<<<<<< HEAD
     uint8_t bpp_eve = EVE_L4;
 
     uint32_t ramg_addr = lv_draw_eve_label_upload_glyph(true, font_dsc, gid_index);
     if(ramg_addr == LV_DRAW_EVE_RAMG_OUT_OF_RAMG) {
         LV_LOG_WARN("Could not load glyph because space could not be allocated in RAM_G.");
         return;
+=======
+    /* Only 4 bpp is supported for now. Support for 1 and 8 bpp can be added. (EVE_L1, EVE_L8) */
+    uint8_t bpp_eve = EVE_L4;
+
+    uint32_t glyph_ramg_size = g_aligned_stride * g_box_h;
+
+    uint32_t ramg_addr;
+    uintptr_t glyph_ramg_key = (uintptr_t) glyph_bitmap;
+    bool font_is_loaded = lv_draw_eve_ramg_get_addr(&ramg_addr, glyph_ramg_key, glyph_ramg_size, 1);
+
+    if(!font_is_loaded) { /* If the font is not yet loaded in ramG, load it */
+        if(ramg_addr == LV_DRAW_EVE_RAMG_OUT_OF_RAMG) {
+            LV_LOG_WARN("Could not load glyph because space could not be allocated in RAM_G.");
+            return;
+        }
+
+        font_bitmap_to_ramg(ramg_addr, glyph_bitmap, g_box_w, g_box_h);
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
     }
 
     lv_eve_color_opa(glyph_draw_dsc->opa);
     lv_eve_color(glyph_draw_dsc->color);
 
+<<<<<<< HEAD
     lv_eve_bitmap_source(ramg_addr);
 
     lv_eve_bitmap_size(EVE_NEAREST, EVE_BORDER, EVE_BORDER, g_box_w, g_box_h);
     lv_eve_bitmap_layout(bpp_eve, g_aligned_stride, g_box_h);
+=======
+    EVE_cmd_dl_burst(BITMAP_SOURCE(ramg_addr));
+
+    EVE_cmd_dl_burst(BITMAP_SIZE(EVE_NEAREST, EVE_BORDER, EVE_BORDER, g_box_w, g_box_h));
+    EVE_cmd_dl_burst(BITMAP_LAYOUT(bpp_eve, g_aligned_stride, g_box_h));
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 
     lv_eve_vertex_2f(glyph_draw_dsc->letter_coords->x1, glyph_draw_dsc->letter_coords->y1);
 }
@@ -167,11 +218,21 @@ static void lv_draw_eve_letter_cb(lv_draw_task_t * t, lv_draw_glyph_dsc_t * glyp
 static void font_bitmap_to_ramg(uint32_t addr, const uint8_t * src, uint32_t width,
                                 uint32_t height, uint8_t src_stride_align)
 {
+<<<<<<< HEAD
+=======
+    EVE_end_cmd_burst();
+
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
     uint32_t stride = (width + 1) / 2;
 
     if(src_stride_align == 1 || (src_stride_align == 0 && width % 2 == 0)) {
         uint32_t size = stride * height;
         EVE_memWrite_flash_buffer(addr, src, size);
+<<<<<<< HEAD
+=======
+
+        EVE_start_cmd_burst();
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
         return;
     }
 
@@ -226,6 +287,11 @@ static void font_bitmap_to_ramg(uint32_t addr, const uint8_t * src, uint32_t wid
     }
 
     lv_free(row_buf);
+<<<<<<< HEAD
+=======
+
+    EVE_start_cmd_burst();
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 }
 
 

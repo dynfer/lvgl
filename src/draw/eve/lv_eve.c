@@ -55,8 +55,11 @@ static lv_eve_drawing_context_t ct = {
 
 static lv_eve_drawing_context_t ct_temp;
 
+<<<<<<< HEAD
 static lv_eve_drawing_state_t st;
 
+=======
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 /**********************
  *      MACROS
  **********************/
@@ -217,6 +220,7 @@ void lv_eve_mask_round(int16_t coord_x1, int16_t coord_y1, int16_t coord_x2, int
     lv_eve_blend_func(EVE_DST_ALPHA, EVE_ONE_MINUS_DST_ALPHA);
 }
 
+<<<<<<< HEAD
 void lv_eve_bitmap_source(uint32_t addr)
 {
     uint32_t bitmap_source = BITMAP_SOURCE(addr);
@@ -256,6 +260,8 @@ void lv_eve_bitmap_layout(uint8_t format, uint16_t linestride, uint16_t height)
     }
 }
 
+=======
+>>>>>>> 9d8d3057e (feat(EVE): Add EVE draw unit (#8211))
 
 
 /**********************
