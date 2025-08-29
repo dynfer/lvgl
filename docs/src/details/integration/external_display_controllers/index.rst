@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 .. _display controllers:
 
+=======
+>>>>>>> 541e9e42f (docs(integration): reorganize the files (#8701))
 ==========================
 Display Controller Support
 ==========================

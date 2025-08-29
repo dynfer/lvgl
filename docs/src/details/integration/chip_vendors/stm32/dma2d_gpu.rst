@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .. _dma2d:
 
 ===========
@@ -67,6 +68,11 @@ is **not** enabled. LTDC will use the DMA2D peripheral for flushing, if that is 
 NeoChrom and DMA2D may be enabled at the same time. They are both draw units
 and they will both independently accept draw tasks.
 
+=======
+===============
+STM32 DMA2D GPU
+===============
+>>>>>>> 541e9e42f (docs(integration): reorganize the files (#8701))
 
 API
 ***
