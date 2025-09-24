@@ -4367,11 +4367,11 @@
             #endif
         #endif
     #else
-        #ifndef LV_USE_ST_LDC
-            #ifdef CONFIG_LV_USE_ST_LDC
-                #define LV_USE_ST_LDC CONFIG_LV_USE_ST_LDC
+        #ifndef LV_USE_ST_LTDC
+            #ifdef CONFIG_LV_USE_ST_LTDC
+                #define LV_USE_ST_LTDC CONFIG_LV_USE_ST_LTDC
             #else
-                #define LV_USE_ST_LDC 0
+                #undef LV_USE_ST_LTDC 0
             #endif
         #endif
         #ifndef LV_USE_ST_LTDC_CHIBIOS

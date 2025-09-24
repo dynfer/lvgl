@@ -13,6 +13,7 @@
 #include "lv_st_ltdc_chibios.h"
 #include "../../../display/lv_display_private.h"
 #include "../../../draw/sw/lv_draw_sw.h"
+#include "../../../osal/lv_chibios.h"
 #include LV_ST_LTDC_INCLUDE
 #define LTDC_PIXEL_FORMAT_ARGB8888 LTDC_FMT_ARGB8888
 #define LTDC_PIXEL_FORMAT_RGB888  LTDC_FMT_RGB888
