@@ -20,6 +20,8 @@
 #define LTDC_PIXEL_FORMAT_RGB565  LTDC_FMT_RGB565
 #define LTDC_PIXEL_FORMAT_L8     LTDC_FMT_L8
 #define LTDC_PIXEL_FORMAT_AL88   LTDC_FMT_AL88
+#if LV_ST_LTDC_USE_DMA2D_FLUSH
+#include LV_ST_LTDC_DMA2D_INCLUDE
 #define DMA2D_OUTPUT_ARGB8888 DMA2D_FMT_ARGB8888
 #define DMA2D_OUTPUT_RGB888  DMA2D_FMT_RGB888
 #define DMA2D_OUTPUT_RGB565  DMA2D_FMT_RGB565
@@ -29,6 +31,7 @@
 #define DMA2D_INPUT_L8     DMA2D_FMT_L8
 #define DMA2D_INPUT_AL88   DMA2D_FMT_AL88
 #define DMA2D_INPUT_A8 DMA2D_FMT_A8
+#endif
 
 #if LV_ST_LTDC_USE_DMA2D_FLUSH
     #if LV_USE_DRAW_DMA2D
@@ -257,6 +260,17 @@ void reload_event_callback_handler(void)
 }
 
 #if LV_ST_LTDC_USE_DMA2D_FLUSH
+
+static void transfer_complete_callback(void)
+{
+    DMA2D->IFCR = 0x3FU;
+    uint32_t owner = g_data.dma2d_interrupt_owner;
+    if(owner) {
+        g_data.dma2d_interrupt_owner = 0;
+        owner -= 1;
+        SYNC_SIGNAL_ISR(owner);
+    }
+}
 
 void transfer_complete_callback_handler(void)
 {
